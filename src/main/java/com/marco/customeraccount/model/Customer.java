@@ -22,5 +22,7 @@ public class Customer {
 
     @Column(name = "surname")
     private String surname;
+
+    // accounts
 }
 

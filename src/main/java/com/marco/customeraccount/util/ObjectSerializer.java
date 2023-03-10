@@ -1,6 +1,8 @@
 package com.marco.customeraccount.util;
 
+import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.CustomerDTO;
+import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,13 @@ public class ObjectSerializer {
                 customer.getId(),
                 customer.getName(),
                 customer.getSurname()
+        );
+    }
+
+    public AccountDTO toAccountDTO(Account account) {
+        return new AccountDTO(
+                account.getCustomer(),
+                account.getBalance()
         );
     }
 }
