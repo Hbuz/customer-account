@@ -3,9 +3,9 @@ package com.marco.customeraccount.service;
 import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.AccountReqDTO;
 import com.marco.customeraccount.model.Account;
-import com.marco.customeraccount.model.User;
+import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.repository.AccountRepository;
-import com.marco.customeraccount.repository.UserRepository;
+import com.marco.customeraccount.repository.CustomerRepository;
 import com.marco.customeraccount.util.ObjectSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +20,14 @@ public class AccountServiceImpl implements AccountService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     private final AccountRepository accountRepository;
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final ObjectSerializer objectSerializer;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, UserRepository userRepository,
+    public AccountServiceImpl(AccountRepository accountRepository, CustomerRepository customerRepository,
                               ObjectSerializer objectSerializer) {
         this.accountRepository = accountRepository;
-        this.userRepository = userRepository;
+        this.customerRepository = customerRepository;
         this.objectSerializer = objectSerializer;
     }
 
@@ -39,11 +39,11 @@ public class AccountServiceImpl implements AccountService {
 
         LOGGER.debug("openAccount - accountReqDTO:{}", accountReqDTO);
 
-        Optional<User> userOpt = userRepository.findByCustomerID(accountReqDTO.getCustomerID());
-        if (userOpt.isPresent()) {
+        Optional<Customer> customerOpt = customerRepository.findById(accountReqDTO.getCustomerID());
+        if (customerOpt.isPresent()) {
 
             Account account = new Account();
-            account.setUser(userOpt.get());
+            account.setCustomer(customerOpt.get());
             account.setBalance(accountReqDTO.getInitialCredit());
             account = accountRepository.save(account);
 

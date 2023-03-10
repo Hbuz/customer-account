@@ -1,6 +1,7 @@
 package com.marco.customeraccount.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.marco.customeraccount.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class AccountDTO {
 
-    @JsonProperty("customer_id")
-    private String customerID;
+    @JsonProperty("customer")
+    private Customer customer;
 
     @JsonProperty("balance")
     private BigDecimal balance;

@@ -22,7 +22,7 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private User user;
+    private Customer customer;
 
     @Column(name = "balance")
     @NotNull

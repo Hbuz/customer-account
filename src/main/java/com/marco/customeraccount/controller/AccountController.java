@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController("AccountController")
-@RequestMapping(path = "/accounts")
+@RequestMapping(path = "/api/v1/accounts")
 public class AccountController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountController.class);

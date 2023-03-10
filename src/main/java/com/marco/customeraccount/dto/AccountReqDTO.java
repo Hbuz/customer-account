@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class AccountReqDTO {
 
     @JsonProperty("customer_id")
-    private String customerID;
+    private Long customerID;
 
     @JsonProperty("initial_credit")
     private BigDecimal initialCredit;
