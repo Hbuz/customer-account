@@ -6,19 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The user DTO
+ * The customer DTO
  */
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserDTO {
+public class CustomerDTO {
 
     @JsonProperty("id")
     private Long id;
-    @JsonProperty("customer_id")
-    private String customerID;
+
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("surname")
     private String surname;
 }
