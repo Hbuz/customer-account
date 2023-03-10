@@ -4,5 +4,5 @@ import com.marco.customeraccount.dto.CustomerDTO;
 
 public interface CustomerService {
 
-    CustomerDTO fetchCustomerInfo(String customerID);
+    CustomerDTO fetchCustomerInfo(Long id);
 }

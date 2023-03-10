@@ -17,9 +17,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "customer_id")
-    private String customerID;
-
     @Column(name = "name")
     private String name;
 

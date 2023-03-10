@@ -31,9 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     @Override
-    public CustomerDTO fetchCustomerInfo(String customerID) {
+    public CustomerDTO fetchCustomerInfo(Long id) {
 
-        Optional<Customer> customerOpt = customerRepository.findByCustomerID(customerID);
+        Optional<Customer> customerOpt = customerRepository.findById(id);
         if (customerOpt.isPresent()) {
 
             LOGGER.debug("Customer found: {} {}", customerOpt.get().getName(), customerOpt.get().getSurname());

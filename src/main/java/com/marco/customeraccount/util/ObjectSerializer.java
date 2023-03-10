@@ -10,7 +10,6 @@ public class ObjectSerializer {
     public CustomerDTO toCustomerDTO(Customer customer) {
         return new CustomerDTO(
                 customer.getId(),
-                customer.getCustomerID(),
                 customer.getName(),
                 customer.getSurname()
         );

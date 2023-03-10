@@ -30,12 +30,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/{customerID}")
-    public ResponseEntity<CustomerDTO> fetchCustomerInfo(@PathVariable("customerID") String customerID) {
-        LOGGER.debug("fetchCustomerInfo - customerID:{}", customerID);
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerDTO> fetchCustomerInfo(@PathVariable("id") Long id) {
+        LOGGER.debug("fetchCustomerInfo - id:{}", id);
 
         try {
-            CustomerDTO response = customerService.fetchCustomerInfo(customerID);
+            CustomerDTO response = customerService.fetchCustomerInfo(id);
 
             return ok(response);
 
