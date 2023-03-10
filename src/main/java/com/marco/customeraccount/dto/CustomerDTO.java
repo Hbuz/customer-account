@@ -6,12 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The user DTO
+ * The customer DTO
  */
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserDTO {
+public class CustomerDTO {
 
     @JsonProperty("id")
     private Long id;
