@@ -25,5 +25,7 @@ public class User {
 
     @Column(name = "surname")
     private String surname;
+
+    // accounts
 }
 
