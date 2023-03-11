@@ -11,7 +11,7 @@ public interface AccountService {
     /**
      * Service to open an account
      *
-     * @param accountReqDTO The user information to open the account
+     * @param accountReqDTO The customer information to open the account
      * @return the created account
      */
     AccountDTO openAccount(AccountReqDTO accountReqDTO);
