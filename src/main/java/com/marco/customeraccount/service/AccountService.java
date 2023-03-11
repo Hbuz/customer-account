@@ -1,7 +1,7 @@
 package com.marco.customeraccount.service;
 
 import com.marco.customeraccount.dto.AccountDTO;
-import com.marco.customeraccount.dto.AccountReqDTO;
+import com.marco.customeraccount.dto.request.AccountReqDTO;
 
 /**
  *
