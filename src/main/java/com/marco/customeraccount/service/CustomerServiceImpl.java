@@ -33,6 +33,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO fetchCustomerInfo(Long id) {
 
+        LOGGER.debug("fetchCustomerInfo - id:{}", id);
+
         Optional<Customer> customerOpt = customerRepository.findById(id);
         if (customerOpt.isPresent()) {
 
