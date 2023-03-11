@@ -23,6 +23,8 @@ public class Customer {
     @Column(name = "surname")
     private String surname;
 
-    // accounts
+//    @OneToMany
+//    @JoinColumn(name = "customer_id")
+//    private List<Account> accounts;
 }
 

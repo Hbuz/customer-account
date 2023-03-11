@@ -1,7 +1,7 @@
 package com.marco.customeraccount.controller;
 
 import com.marco.customeraccount.dto.AccountDTO;
-import com.marco.customeraccount.dto.AccountReqDTO;
+import com.marco.customeraccount.dto.request.AccountReqDTO;
 import com.marco.customeraccount.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

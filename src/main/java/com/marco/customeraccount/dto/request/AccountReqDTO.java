@@ -1,4 +1,4 @@
-package com.marco.customeraccount.dto;
+package com.marco.customeraccount.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

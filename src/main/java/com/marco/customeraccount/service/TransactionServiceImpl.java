@@ -5,14 +5,15 @@ import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Transaction;
 import com.marco.customeraccount.repository.TransactionRepository;
 import com.marco.customeraccount.util.ObjectSerializer;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Service
+@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
@@ -21,11 +22,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final ObjectSerializer objectSerializer;
 
-    @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository, ObjectSerializer objectSerializer) {
-        this.transactionRepository = transactionRepository;
-        this.objectSerializer = objectSerializer;
-    }
 
     /**
      * {@inheritDoc}

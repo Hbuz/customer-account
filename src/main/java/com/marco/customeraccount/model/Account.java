@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * The account entity model representing the related DB table
@@ -29,7 +28,7 @@ public class Account {
     @NotNull
     private BigDecimal balance;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
-    private List<Transaction> transactions;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "account_id")
+//    private List<Transaction> transactions;
 }
