@@ -11,9 +11,9 @@ import com.marco.customeraccount.repository.AccountRepository;
 import com.marco.customeraccount.repository.CustomerRepository;
 import com.marco.customeraccount.repository.TransactionRepository;
 import com.marco.customeraccount.util.ObjectSerializer;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
@@ -31,14 +32,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final ObjectSerializer objectSerializer;
 
-    @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, AccountRepository accountRepository,
-                               TransactionRepository transactionRepository, ObjectSerializer objectSerializer) {
-        this.customerRepository = customerRepository;
-        this.accountRepository = accountRepository;
-        this.transactionRepository = transactionRepository;
-        this.objectSerializer = objectSerializer;
-    }
 
     /**
      * {@inheritDoc}

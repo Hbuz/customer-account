@@ -8,9 +8,9 @@ import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.repository.AccountRepository;
 import com.marco.customeraccount.repository.CustomerRepository;
 import com.marco.customeraccount.util.ObjectSerializer;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
@@ -29,15 +30,6 @@ public class AccountServiceImpl implements AccountService {
     private final TransactionService transactionService;
 
     private final ObjectSerializer objectSerializer;
-
-    @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, CustomerRepository customerRepository,
-                              TransactionService transactionService, ObjectSerializer objectSerializer) {
-        this.accountRepository = accountRepository;
-        this.customerRepository = customerRepository;
-        this.transactionService = transactionService;
-        this.objectSerializer = objectSerializer;
-    }
 
     /**
      * {@inheritDoc}
