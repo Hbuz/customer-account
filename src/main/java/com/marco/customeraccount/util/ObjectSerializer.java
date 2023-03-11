@@ -12,24 +12,21 @@ import org.springframework.stereotype.Component;
 public class ObjectSerializer {
 
     public CustomerDTO toCustomerDTO(Customer customer) {
-        return new CustomerDTO(
-                customer.getId(),
-                customer.getName(),
-                customer.getSurname()
-        );
+        return CustomerDTO.builder()
+                .name(customer.getName())
+                .surname(customer.getSurname())
+                .build();
     }
 
     public AccountDTO toAccountDTO(Account account) {
         return AccountDTO.builder()
-                .customer(account.getCustomer())
                 .balance(account.getBalance())
                 .build();
     }
 
     public TransactionDTO toTransactionDTO(Transaction transaction) {
-        return new TransactionDTO(
-                transaction.getId(),
-                transaction.getAmount()
-        );
+        return TransactionDTO.builder()
+                .amount(transaction.getAmount())
+                .build();
     }
 }
