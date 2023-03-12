@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
 
         LOGGER.debug("openAccount - accountReqDTO:{}", accountReqDTO);
 
-        Optional<Customer> customerOpt = customerRepository.findById(accountReqDTO.getCustomerID());
+        Optional<Customer> customerOpt = customerRepository.findById(accountReqDTO.getCustomerId());
         if (customerOpt.isPresent()) {
 
             Account account = new Account();

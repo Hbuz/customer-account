@@ -40,5 +40,4 @@ public class TransactionServiceImpl implements TransactionService {
 
         return objectSerializer.toTransactionDTO(transaction);
     }
-
 }
