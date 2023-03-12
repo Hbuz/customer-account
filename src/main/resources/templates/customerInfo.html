@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Customer accounts</title>
+</head>
+<body>
+
+<h2>Customer details</h2>
+
+<table border="1" style="text-align: center;">
+
+    <tr>
+        <th>Customer Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Accounts</th>
+    </tr>
+    <tr>
+        <td th:utext="${customerId}"></td>
+        <td th:utext="${customerName}"></td>
+        <td th:utext="${customerSurname}"></td>
+        <td>
+            <table th:if="${accounts!=null and !accounts.empty}" border="1"
+                   style="margin: 5px;">
+                <tr>
+                    <th>Balance</th>
+                    <th>Transactions</th>
+                </tr>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.balance}"></td>
+                    <td>
+                        <table th:if="${account.transactions!=null and !account.transactions.empty}" border="1"
+                               style="margin: 5px;">
+                            <tr>
+                                <th>Amount</th>
+                            </tr>
+                            <tr th:each="transaction : ${account.transactions}">
+                                <td th:text="${transaction.amount}"></td>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+package com.marco.customeraccount.service;
+
+import com.marco.customeraccount.dto.CustomerDTO;
+
+import java.util.List;
+
+public interface CustomerService {
+
+    /**
+     * Service to fetch customer info
+     *
+     * @param id The customer ID
+     * @return the customer info
+     */
+    CustomerDTO fetchCustomerInfo(Long id);
+
+    /**
+     * Service to fetch all customers
+     *
+     * @return the list of customers
+     */
+    List<CustomerDTO> fetchAllCustomers();
+}
