@@ -73,4 +73,12 @@ public class CustomerServiceImpl implements CustomerService {
         }
         throw new NotFoundException();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CustomerDTO> fetchAll(){
+        return null;
+    }
 }
