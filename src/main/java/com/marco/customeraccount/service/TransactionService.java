@@ -15,4 +15,5 @@ public interface TransactionService {
      * @return The transaction sent
      */
     TransactionDTO sendTransaction(Account account, BigDecimal amount);
+
 }

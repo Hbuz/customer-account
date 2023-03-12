@@ -20,15 +20,12 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
     @Column(name = "balance")
     @NotNull
     private BigDecimal balance;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "account_id")
-//    private List<Transaction> transactions;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
 }

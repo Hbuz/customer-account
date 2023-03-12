@@ -1,7 +1,7 @@
 package com.marco.customeraccount.controller;
 
+import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.CustomerDTO;
-import com.marco.customeraccount.dto.TransactionDTO;
 import com.marco.customeraccount.dto.request.AccountReqDTO;
 import com.marco.customeraccount.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,40 +21,56 @@ public class WebController {
     private final AccountController accountController;
 
     @GetMapping
-        public String welcomePage() {
+    public String welcomePage() {
         return "welcome";
     }
 
-    @GetMapping ("/customers")
-    public String showAllCustomers(Model model){
+    @GetMapping("/customers")
+    public String showAllCustomers(Model model) {
         List<CustomerDTO> customers = customerService.fetchAllCustomers();
         model.addAttribute("customers", customers);
         return "customers";
     }
 
     @GetMapping("/customers/{id}")
-    public String showCustomerInfo(Model model, @PathVariable Long id) {
+    public String showCustomerAccounts(Model model, @PathVariable Long id) {
         CustomerDTO customerInfo = customerService.fetchCustomerInfo(id);
 
-        List<TransactionDTO> transactions = new ArrayList<>();
+        model.addAttribute("customerId", customerInfo.getId());
+        model.addAttribute("name", customerInfo.getName());
+        model.addAttribute("surname", customerInfo.getSurname());
+        model.addAttribute("accounts", customerInfo.getAccounts());
 
-        customerInfo.getAccounts().forEach((account -> account.getTransactions()
-                .forEach(transaction -> transactions.add(
-                        TransactionDTO.builder()
-                                .amount(transaction.getAmount())
-                                .build()))));
+        AccountReqDTO accountReqDTO = AccountReqDTO.builder()
+                .customerId(id)
+                .build();
+        model.addAttribute("accountReqDTO", accountReqDTO);
+        return "accounts";
+    }
 
-        model.addAttribute("customerId", id);
+    @GetMapping("/customers/{customerId}/accounts/{accountId}")
+    public String showAccountTransactions(Model model,
+                                          @PathVariable Long customerId,
+                                          @PathVariable Long accountId) {
+
+        CustomerDTO customerInfo = customerService.fetchCustomerInfo(customerId);
+
+        AccountDTO found = customerInfo.getAccounts().stream()
+                .filter(account -> accountId.equals(account.getId()))
+                .findFirst()
+                .orElse(null);
+
+        model.addAttribute("customerId", customerId);
         model.addAttribute("customerName", customerInfo.getName());
         model.addAttribute("customerSurname", customerInfo.getSurname());
         model.addAttribute("accounts", customerInfo.getAccounts());
-        model.addAttribute("transactions", transactions);
-        return "customerInfo";
+        model.addAttribute("transactions", found.getTransactions());
+        return "transactions";
     }
 
     @PostMapping("/accounts")
     public String openAccount(@ModelAttribute("accountReqDTO") AccountReqDTO accountReqDTO) {
         accountController.openAccount(accountReqDTO);
-        return "redirect:/web/customers/" + accountReqDTO.getCustomerID();
+        return "redirect:/web/customers/" + accountReqDTO.getCustomerId();
     }
 }

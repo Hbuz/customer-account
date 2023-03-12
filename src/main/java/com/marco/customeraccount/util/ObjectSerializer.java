@@ -13,6 +13,7 @@ public class ObjectSerializer {
 
     public CustomerDTO toCustomerDTO(Customer customer) {
         return CustomerDTO.builder()
+                .id(customer.getId())
                 .name(customer.getName())
                 .surname(customer.getSurname())
                 .build();
@@ -20,6 +21,7 @@ public class ObjectSerializer {
 
     public AccountDTO toAccountDTO(Account account) {
         return AccountDTO.builder()
+                .id(account.getId())
                 .balance(account.getBalance())
                 .build();
     }

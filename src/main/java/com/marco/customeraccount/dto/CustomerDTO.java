@@ -1,5 +1,6 @@
 package com.marco.customeraccount.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +16,8 @@ import java.util.List;
 @Builder
 public class CustomerDTO {
 
-//    @JsonProperty("id")
-//    private Long id;
+    @JsonIgnore
+    private Long id;
 
     @JsonProperty("name")
     private String name;
