@@ -13,17 +13,12 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/web")
+@RequestMapping("/web/v1")
 public class WebController {
 
     private final CustomerService customerService;
 
     private final AccountController accountController;
-
-    @GetMapping
-    public String welcomePage() {
-        return "welcome";
-    }
 
     @GetMapping("/customers")
     public String showAllCustomers(Model model) {
@@ -63,7 +58,7 @@ public class WebController {
         model.addAttribute("customerId", customerId);
         model.addAttribute("customerName", customerInfo.getName());
         model.addAttribute("customerSurname", customerInfo.getSurname());
-        model.addAttribute("accounts", customerInfo.getAccounts());
+        model.addAttribute("accountNumber", found.getAccountNumber());
         model.addAttribute("transactions", found.getTransactions());
         return "transactions";
     }
@@ -71,6 +66,6 @@ public class WebController {
     @PostMapping("/accounts")
     public String openAccount(@ModelAttribute("accountReqDTO") AccountReqDTO accountReqDTO) {
         accountController.openAccount(accountReqDTO);
-        return "redirect:/web/customers/" + accountReqDTO.getCustomerId();
+        return "redirect:/web/v1/customers/" + accountReqDTO.getCustomerId();
     }
 }
