@@ -29,16 +29,16 @@ public class TransactionServiceImpl implements TransactionService {
      * {@inheritDoc}
      */
     @Override
-    public TransactionDTO sendTransaction(Account account, BigDecimal amount) {
+    public TransactionDTO sendTransaction(Account account, BigDecimal amount, String description) {
 
         LOGGER.debug("sendTransaction - account:{} | amount:{}", account, amount);
 
         Transaction transaction = new Transaction();
         transaction.setTransactionNumber(UUID.randomUUID().toString());
         transaction.setAmount(amount);
-//        transaction.setRecipient(account.getAccountNumber());
+        transaction.setRecipient(account.getAccountNumber());
         transaction.setAccount(account);
-        transaction.setDescription("initial credit");
+        transaction.setDescription(description);
 
         transaction = transactionRepository.save(transaction);
 

@@ -20,6 +20,10 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "account_number")
+    @NotNull
+    private String accountNumber;
+
     @Column(name = "balance")
     @NotNull
     private BigDecimal balance;

@@ -27,6 +27,7 @@ public class ObjectSerializer {
     public AccountDTO toAccountDTO(Account account) {
         return AccountDTO.builder()
                 .id(account.getId())
+                .accountNumber(account.getAccountNumber())
                 .balance(account.getBalance())
                 .build();
     }
