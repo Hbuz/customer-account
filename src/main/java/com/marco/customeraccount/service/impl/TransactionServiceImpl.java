@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +34,11 @@ public class TransactionServiceImpl implements TransactionService {
         LOGGER.debug("sendTransaction - account:{} | amount:{}", account, amount);
 
         Transaction transaction = new Transaction();
-        transaction.setAccount(account);
+        transaction.setTransactionNumber(UUID.randomUUID().toString());
         transaction.setAmount(amount);
+//        transaction.setRecipient(account.getAccountNumber());
+        transaction.setAccount(account);
+        transaction.setDescription("initial credit");
 
         transaction = transactionRepository.save(transaction);
 
