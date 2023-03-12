@@ -1,15 +1,17 @@
-package com.marco.customeraccount.service;
+package com.marco.customeraccount.service.impl;
 
 import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.CustomerDTO;
 import com.marco.customeraccount.dto.TransactionDTO;
 import com.marco.customeraccount.exception.NotFoundException;
+import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.model.Transaction;
 import com.marco.customeraccount.repository.AccountRepository;
 import com.marco.customeraccount.repository.CustomerRepository;
 import com.marco.customeraccount.repository.TransactionRepository;
+import com.marco.customeraccount.service.CustomerService;
 import com.marco.customeraccount.util.ObjectSerializer;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -41,6 +43,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         LOGGER.debug("fetchCustomerInfo - id:{}", id);
 
+        if (id == null || id == 0) {
+            throw new ValueNotValidException();
+        }
+
         Optional<Customer> customerOpt = customerRepository.findById(id);
         if (customerOpt.isPresent()) {
 
@@ -71,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             return customerDTO;
         }
+
         throw new NotFoundException();
     }
 
@@ -78,7 +85,12 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     @Override
-    public List<CustomerDTO> fetchAll(){
-        return null;
+    public List<CustomerDTO> fetchAllCustomers(){
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
+
+        List<Customer> customers = customerRepository.findAll();
+        customers.forEach(customer -> customerDTOS.add(objectSerializer.toCustomerDTO(customer)));
+
+        return customerDTOS;
     }
 }

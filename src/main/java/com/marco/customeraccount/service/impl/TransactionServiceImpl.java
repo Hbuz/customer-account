@@ -1,9 +1,10 @@
-package com.marco.customeraccount.service;
+package com.marco.customeraccount.service.impl;
 
 import com.marco.customeraccount.dto.TransactionDTO;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Transaction;
 import com.marco.customeraccount.repository.TransactionRepository;
+import com.marco.customeraccount.service.TransactionService;
 import com.marco.customeraccount.util.ObjectSerializer;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

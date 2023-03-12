@@ -28,7 +28,7 @@ public class WebController {
 
     @GetMapping ("/customers")
     public String showAllCustomers(Model model){
-        List<CustomerDTO> customers = customerService.fetchAll();
+        List<CustomerDTO> customers = customerService.fetchAllCustomers();
         model.addAttribute("customers", customers);
         return "customers";
     }

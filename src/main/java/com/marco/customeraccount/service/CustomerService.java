@@ -19,5 +19,5 @@ public interface CustomerService {
      *
      * @return the list of customers
      */
-    List<CustomerDTO> fetchAll();
+    List<CustomerDTO> fetchAllCustomers();
 }
