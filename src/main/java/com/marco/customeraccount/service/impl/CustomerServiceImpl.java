@@ -85,7 +85,12 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     @Override
-    public List<CustomerDTO> fetchAll(){
-        return null;
+    public List<CustomerDTO> fetchAllCustomers(){
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
+
+        List<Customer> customers = customerRepository.findAll();
+        customers.forEach(customer -> customerDTOS.add(objectSerializer.toCustomerDTO(customer)));
+
+        return customerDTOS;
     }
 }
