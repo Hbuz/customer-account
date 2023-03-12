@@ -18,8 +18,10 @@ import java.util.List;
 public class AccountDTO {
 
     @JsonIgnore
-    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("account_number")
+    private String accountNumber;
 
     @JsonProperty("balance")
     private BigDecimal balance;
