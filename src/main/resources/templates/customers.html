@@ -6,7 +6,7 @@
 
 <body>
 
-<div class="container">
+<div>
 
     <h1>Customers</h1>
 
@@ -23,7 +23,7 @@
             <td th:utext="${customer.name}"></td>
             <td th:utext="${customer.surname}"></td>
             <td>
-                <form method="GET" th:action="@{/web/customers/{id}(id=${customer.id})}">
+                <form method="GET" th:action="@{/web/v1/customers/{id}(id=${customer.id})}">
                     <input type="submit" value="Show accounts"/>
                 </form>
             </td>
