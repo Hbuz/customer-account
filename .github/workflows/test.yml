@@ -1,10 +1,10 @@
-name: Java CI with Maven
+name: Java CI with Maven development
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "development" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "development" ]
 
 jobs:
   build_and_test:
