@@ -1,16 +1,16 @@
 package com.marco.customeraccount.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Getter
-@Setter
+/**
+ * The transaction entity model representing the related DB table
+ */
+@Data
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -35,7 +35,6 @@ public class Transaction {
     @Column(name = "sending_date")
     private Instant sendingDate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
