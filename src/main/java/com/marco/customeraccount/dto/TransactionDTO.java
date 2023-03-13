@@ -2,13 +2,14 @@ package com.marco.customeraccount.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+/**
+ * The transaction DTO
+ */
+@Data
 @Builder
 public class TransactionDTO {
 

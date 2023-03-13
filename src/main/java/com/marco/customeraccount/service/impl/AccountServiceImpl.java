@@ -30,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
     static final String INIT_TRANS_DESC = "initial credit";
 
     private final AccountRepository accountRepository;
+
     private final CustomerRepository customerRepository;
 
     private final TransactionService transactionService;
