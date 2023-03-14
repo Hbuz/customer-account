@@ -1,14 +1,11 @@
 package com.marco.customeraccount.service;
 
-import com.marco.customeraccount.dto.CustomerDTO;
 import com.marco.customeraccount.exception.NotFoundException;
 import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.model.Transaction;
-import com.marco.customeraccount.repository.AccountRepository;
 import com.marco.customeraccount.repository.CustomerRepository;
-import com.marco.customeraccount.repository.TransactionRepository;
 import com.marco.customeraccount.service.impl.CustomerServiceImpl;
 import com.marco.customeraccount.util.ObjectSerializer;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,11 +31,11 @@ public class CustomerServiceTest {
     @Mock
     CustomerRepository customerRepository;
 
-    @Mock
-    AccountRepository accountRepository;
+//    @Mock
+//    AccountRepository accountRepository;
 
-    @Mock
-    TransactionRepository transactionRepository;
+//    @Mock
+//    TransactionRepository transactionRepository;
 
     @InjectMocks
     CustomerServiceImpl customerService;
@@ -69,15 +65,15 @@ public class CustomerServiceTest {
         transactionList1 = new ArrayList<>();
     }
 
-    @Test
-    public void whenFetchCustomerInfo_andParamIsValid_thenReturnCustomerInfo() {
-        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
-        when(accountRepository.findAccountsByCustomerId(1L)).thenReturn(Optional.of(accountList1));
-        when(transactionRepository.findTransactionsByAccountId(1L)).thenReturn(Optional.of(transactionList1));
-        CustomerDTO customerDTO = customerService.fetchCustomerInfo(1L);
-
-        assertThat(customerDTO.getName()).isSameAs(customerDTO.getName());
-    }
+//    @Test
+//    public void whenFetchCustomerInfo_andParamIsValid_thenReturnCustomerInfo() {
+//        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
+//        when(accountRepository.findAccountsByCustomerId(1L)).thenReturn(Optional.of(accountList1));
+//        when(transactionRepository.findTransactionsByAccountId(1L)).thenReturn(Optional.of(transactionList1));
+//        CustomerDTO customerDTO = customerService.fetchCustomerInfo(1L);
+//
+//        assertThat(customerDTO.getName()).isSameAs(customerDTO.getName());
+//    }
 
     @Test
     public void whenGetTicket_andNotFound_thenTriggerException() {

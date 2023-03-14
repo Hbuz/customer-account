@@ -1,15 +1,14 @@
 package com.marco.customeraccount.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * The customer entity model representing the related DB table
  */
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -23,8 +22,8 @@ public class Customer {
     @Column(name = "surname")
     private String surname;
 
-//    @OneToMany
-//    @JoinColumn(name = "customer_id")
-//    private List<Account> accounts;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private List<Account> accounts;
 }
 
