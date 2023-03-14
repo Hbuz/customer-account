@@ -78,3 +78,9 @@ GET - http://localhost:8080/api/v1/customers/{customerId}
 A postman collection has been added to the root project. It can be imported and used in Postman to test the application:
 
 ```customer_account_API.postman_collection.json```
+
+
+### Swagger Docs
+```
+http://localhost:8080/swagger-ui.html#/
+```
