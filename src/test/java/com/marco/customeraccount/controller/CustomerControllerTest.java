@@ -1,7 +1,7 @@
 package com.marco.customeraccount.controller;
 
 import com.marco.customeraccount.dto.CustomerDTO;
-import com.marco.customeraccount.exception.NotFoundException;
+import com.marco.customeraccount.exception.CustomerNotFoundException;
 import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.service.CustomerService;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class CustomerControllerTest {
     @Test
     public void givenCustomerID_whenFetchCustomerInfo_andCustomerNotFound_thenReturnError() throws Exception {
 
-        given(customerService.fetchCustomerInfo(2L)).willThrow(new NotFoundException());
+        given(customerService.fetchCustomerInfo(2L)).willThrow(new CustomerNotFoundException(2L));
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/api/v1/customers/{id}", 2L))

@@ -1,18 +1,18 @@
 package com.marco.customeraccount.controller;
 
 import com.marco.customeraccount.dto.CustomerDTO;
-import com.marco.customeraccount.exception.NotFoundException;
 import com.marco.customeraccount.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.ok;
 
 /**
  * Controller to handle customer information
@@ -31,22 +31,11 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> fetchCustomerInfo(@PathVariable("id") Long id) {
+    public ResponseEntity<CustomerDTO> fetchCustomerInfo(@Validated @PathVariable("id") Long id) {
         LOGGER.debug("fetchCustomerInfo - id:{}", id);
 
-        try {
             CustomerDTO response = customerService.fetchCustomerInfo(id);
 
             return ok(response);
-
-        } catch (NotFoundException e) {
-            LOGGER.error("Failed fetchCustomerInfo request. Message:{}", e.getMessage());
-            return notFound().build();
-
-        } catch (Exception e) {
-            LOGGER.error("Failed fetchCustomerInfo request. Message:{}", e.getMessage());
-            return internalServerError().build();
-
-        }
     }
 }

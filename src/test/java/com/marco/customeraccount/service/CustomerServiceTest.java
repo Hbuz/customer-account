@@ -1,6 +1,6 @@
 package com.marco.customeraccount.service;
 
-import com.marco.customeraccount.exception.NotFoundException;
+import com.marco.customeraccount.exception.CustomerNotFoundException;
 import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
@@ -80,7 +80,7 @@ public class CustomerServiceTest {
 
         when(customerRepository.findById(2L)).thenReturn(Optional.empty());
 
-        NotFoundException thrown = assertThrows(NotFoundException.class,
+        CustomerNotFoundException thrown = assertThrows(CustomerNotFoundException.class,
                 () -> customerService.fetchCustomerInfo(2L));
 
         assertTrue(thrown.getMessage().contains("No customer found"));
