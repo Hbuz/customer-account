@@ -1,2 +1,4 @@
 INSERT INTO customers(name, surname) VALUES
-  ('Marco', 'Basilico');
+  ('Marco', 'Basilico'),
+  ('John', 'Smith'),
+  ('Joy', 'Park');
