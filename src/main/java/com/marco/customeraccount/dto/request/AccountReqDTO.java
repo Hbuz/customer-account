@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 /**
@@ -23,6 +23,6 @@ public class AccountReqDTO {
 
     @JsonProperty("initial_credit")
     @NotNull
-    @Max(20)
+    @PositiveOrZero
     private BigDecimal initialCredit;
 }

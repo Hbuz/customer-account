@@ -32,7 +32,7 @@ public class Transaction {
     @NotEmpty
     private String recipient;
 
-    @Size(max = 20, message
+    @Size(max = 200, message
             = "Description name must max 200 characters")
     private String description;
 
