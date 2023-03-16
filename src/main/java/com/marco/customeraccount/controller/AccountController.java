@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +28,11 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountDTO> openAccount(@Validated @RequestBody AccountReqDTO accountReqDTO) {
+    public ResponseEntity<AccountDTO> openAccount(@RequestBody AccountReqDTO accountReqDTO) {
         LOGGER.debug("openAccount - accountReqDTO:{}", accountReqDTO);
 
         AccountDTO response = accountService.openAccount(accountReqDTO);
-
-        return ok(response);
+        return ok().body(response);
     }
 
 }

@@ -24,7 +24,6 @@ public class Account {
     @NotEmpty
     private String accountNumber;
 
-    @Column(name = "balance")
     @PositiveOrZero
     private BigDecimal balance;
 

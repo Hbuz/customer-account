@@ -35,7 +35,6 @@ public class CustomerController {
         LOGGER.debug("fetchCustomerInfo - id:{}", id);
 
             CustomerDTO response = customerService.fetchCustomerInfo(id);
-
-            return ok(response);
+            return ok().body(response);
     }
 }

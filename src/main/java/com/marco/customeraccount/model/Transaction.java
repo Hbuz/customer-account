@@ -26,15 +26,12 @@ public class Transaction {
     @NotEmpty
     private String transactionNumber;
 
-    @Column(name = "amount")
     @PositiveOrZero
     private BigDecimal amount;
 
-    @Column(name = "recipient")
     @NotEmpty
     private String recipient;
 
-    @Column(name = "description")
     @Size(max = 20, message
             = "Description name must max 200 characters")
     private String description;
