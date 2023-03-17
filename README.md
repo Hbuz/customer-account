@@ -79,6 +79,13 @@ GET - http://localhost:8080/api/v1/customers/{customerId}
 customerId = Id of the customer
 ```
 
+### Frontend
+**Show all customers:** http://localhost:8080/web/v1/customers/
+
+**Show customer accounts:** http://localhost:8080/web/v1/customers/1
+
+**Show account transactions:** http://localhost:8080/web/v1/customers/1/accounts/1
+
 
 ### Postman
 A postman collection has been added to the root project. It can be imported and used in Postman to test the application:
