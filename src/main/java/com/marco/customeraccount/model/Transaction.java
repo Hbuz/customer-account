@@ -41,7 +41,7 @@ public class Transaction {
     @Column(name = "sending_date")
     private Instant sendingDate;
 
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.LAZY)
     @NotNull
     @JoinColumn(name = "account_id")
     private Account account;

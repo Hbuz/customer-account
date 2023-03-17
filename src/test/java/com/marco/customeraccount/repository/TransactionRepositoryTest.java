@@ -1,5 +1,6 @@
 package com.marco.customeraccount.repository;
 
+import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Transaction;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,19 +28,30 @@ public class TransactionRepositoryTest {
     private TransactionRepository transactionRepository;
 
     private Transaction transaction1;
+    private Account account1;
 
     @BeforeEach
     public void setUp() {
+        BigDecimal amount = BigDecimal.TEN;
+
         transaction1 = new Transaction();
         transaction1.setTransactionNumber("test transaction number");
-        transaction1.setAmount(BigDecimal.TEN);
+        transaction1.setAmount(amount);
         transaction1.setRecipient("test recipient");
         transaction1.setDescription("test description");
+
+        account1 = new Account();
+        account1.setAccountNumber("test account");
+        account1.setBalance(amount);
+
+        transaction1.setAccount(account1);
+
     }
 
     @Test
     public void whenStoreTransaction_thenReturnTransaction() {
 
+        entityManager.persist(account1);
         entityManager.persist(transaction1);
         entityManager.flush();
 
