@@ -3,7 +3,7 @@ package com.marco.customeraccount.service.impl;
 import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.CustomerDTO;
 import com.marco.customeraccount.dto.TransactionDTO;
-import com.marco.customeraccount.exception.NotFoundException;
+import com.marco.customeraccount.exception.CustomerNotFoundException;
 import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
@@ -61,6 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
 
                 AccountDTO accountDTO = objectSerializer.toAccountDTO(account);
                 accountDTO.setTransactions(transactionDTOS);
+
                 accountDTOS.add(accountDTO);
             }
 
@@ -72,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
             return customerDTO;
         }
 
-        throw new NotFoundException();
+        throw new CustomerNotFoundException(id);
     }
 
     /**
@@ -82,8 +83,8 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerDTO> fetchAllCustomers() {
         List<CustomerDTO> customerDTOS = new ArrayList<>();
 
-        List<Customer> customers = customerRepository.findAll();
-        customers.forEach(customer -> customerDTOS.add(objectSerializer.toCustomerDTO(customer)));
+        customerRepository.findAll()
+                .forEach(customer -> customerDTOS.add(objectSerializer.toCustomerDTO(customer)));
 
         return customerDTOS;
     }

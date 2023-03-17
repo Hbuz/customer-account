@@ -3,6 +3,7 @@ package com.marco.customeraccount.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -16,10 +17,12 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Size(min = 3, max = 20, message
+            = "Customer name must be between 10 and 200 characters")
     private String name;
 
-    @Column(name = "surname")
+    @Size(min = 3, max = 20, message
+            = "Customer surname must be between 10 and 200 characters")
     private String surname;
 
     @OneToMany(fetch = FetchType.LAZY)

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Serializer to convert entities to DTOs
+ *
+ */
 @Component
 public class ObjectSerializer {
 

@@ -4,6 +4,10 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -20,15 +24,17 @@ public class Transaction {
     private Long id;
 
     @Column(name = "transaction_number")
+    @NotEmpty
     private String transactionNumber;
 
-    @Column(name = "amount")
+    @PositiveOrZero
     private BigDecimal amount;
 
-    @Column(name = "recipient")
+    @NotEmpty
     private String recipient;
 
-    @Column(name = "description")
+    @Size(max = 200, message
+            = "Description name must max 200 characters")
     private String description;
 
     @CreationTimestamp
@@ -36,6 +42,7 @@ public class Transaction {
     private Instant sendingDate;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "account_id")
     private Account account;
 }

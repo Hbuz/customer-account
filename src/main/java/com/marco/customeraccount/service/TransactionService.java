@@ -5,6 +5,10 @@ import com.marco.customeraccount.model.Account;
 
 import java.math.BigDecimal;
 
+/**
+ * Transactions services
+ *
+ */
 public interface TransactionService {
 
     /**

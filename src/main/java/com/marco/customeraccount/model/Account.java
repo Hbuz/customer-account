@@ -1,9 +1,10 @@
 package com.marco.customeraccount.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,11 +21,10 @@ public class Account {
     private Long id;
 
     @Column(name = "account_number")
-    @NotNull
+    @NotEmpty
     private String accountNumber;
 
-    @Column(name = "balance")
-    @NotNull
+    @PositiveOrZero
     private BigDecimal balance;
 
     @ManyToOne

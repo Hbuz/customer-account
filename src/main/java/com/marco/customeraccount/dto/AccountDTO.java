@@ -21,9 +21,7 @@ public class AccountDTO {
     @JsonProperty("account_number")
     private String accountNumber;
 
-    @JsonProperty("balance")
     private BigDecimal balance;
 
-    @JsonProperty("transactions")
     private List<TransactionDTO> transactions;
 }
