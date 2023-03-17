@@ -3,6 +3,8 @@ package com.marco.customeraccount.service.impl;
 import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.TransactionDTO;
 import com.marco.customeraccount.dto.request.AccountReqDTO;
+import com.marco.customeraccount.exception.CustomerNotFoundException;
+import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.repository.AccountRepository;
@@ -16,10 +18,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +36,8 @@ public class AccountServiceImpl implements AccountService {
     static final String INIT_TRANS_DESC = "initial credit";
 
     private final AccountRepository accountRepository;
+
+    private final Validator validator;
 
     private final CustomerRepository customerRepository;
 
@@ -44,6 +52,20 @@ public class AccountServiceImpl implements AccountService {
     public AccountDTO openAccount(AccountReqDTO accountReqDTO) {
 
         LOGGER.debug("openAccount - accountReqDTO:{}", accountReqDTO);
+
+        if (accountReqDTO == null) {
+            throw new ValueNotValidException();
+        }
+
+        Set<ConstraintViolation<AccountReqDTO>> violations = validator.validate(accountReqDTO);
+        if (!violations.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<AccountReqDTO> constraintViolation : violations) {
+                sb.append(constraintViolation.getMessage());
+            }
+
+            throw new ConstraintViolationException("Error occurred: " + sb, violations);
+        }
 
         Optional<Customer> customerOpt = customerRepository.findById(accountReqDTO.getCustomerId());
         if (customerOpt.isPresent()) {
@@ -68,6 +90,6 @@ public class AccountServiceImpl implements AccountService {
             return accountDTO;
         }
 
-        return AccountDTO.builder().build();
+        throw new CustomerNotFoundException(accountReqDTO.getCustomerId());
     }
 }

@@ -4,8 +4,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -41,7 +39,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST, "Invalid parameter", details);
-        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CustomerNotFoundException.class)
@@ -60,18 +58,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                         .concat(" ").
                         concat(constraint.getMessage())));
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST, "Value not valid", details);
-        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<String> details = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            details.add(fieldName.concat(" ").concat(errorMessage));
-        });
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST, "Parameter not valid", details);
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 

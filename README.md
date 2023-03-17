@@ -10,7 +10,7 @@ customers.
 - Maven
 - Spring Boot
 - H2 DB
-- JUnit
+- JUnit/Mockito
 - Lombok
 
 ### CI/CD Tools
@@ -55,22 +55,28 @@ java -jar target/*.jar
 ```
 
 ### Endpoints implemented
-* Open customer account
+#### 1. Open customer account:
+*endpoint:*
 ```
 POST - http://localhost:8080/api/v1/accounts
+```
 
-* request body *
+*request body:*
+```
 {
     "customer_id": 1,
     "initial_credit": 200
 }
 ```
 
-* Fetch customer information
+#### 2. Fetch customer information
+*endpoint:*
 ```
 GET - http://localhost:8080/api/v1/customers/{customerId}
-
-- customerId = Id of the customer
+```
+*path parameter:*
+```
+customerId = Id of the customer
 ```
 
 
@@ -83,4 +89,26 @@ A postman collection has been added to the root project. It can be imported and 
 ### Swagger Docs
 ```
 http://localhost:8080/swagger-ui.html#/
+```
+
+### Initial Database setup
+- SQL script:
+```
+INSERT INTO customers(name, surname) VALUES
+  ('Marco', 'Basilico'),
+  ('John', 'Smith'),
+  ('Joy', 'Park');
+```
+
+- Result
+```
+-------------------------
+| id | name  | surname  |
+|-----------------------|
+| 1  | Marco | Basilico |
+|-----------------------|
+| 2  | John  | Smith    |
+|-----------------------|
+| 3  | Joy   | Park     |
+-------------------------
 ```

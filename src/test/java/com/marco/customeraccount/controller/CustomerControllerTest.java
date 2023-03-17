@@ -63,11 +63,11 @@ public class CustomerControllerTest {
     @Test
     public void givenCustomerID_whenFetchCustomerInfo_andValueNotValid_thenReturnError() throws Exception {
 
-        given(customerService.fetchCustomerInfo(0L)).willThrow(new ValueNotValidException());
+        given(customerService.fetchCustomerInfo(-1L)).willThrow(new ValueNotValidException());
 
         mvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/customers/{id}", 0))
+                        .get("/api/v1/customers/{id}", -1))
                 .andDo(print())
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
     }
 }
