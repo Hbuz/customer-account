@@ -4,6 +4,10 @@ import com.marco.customeraccount.dto.CustomerDTO;
 
 import java.util.List;
 
+/**
+ * Customer services
+ *
+ */
 public interface CustomerService {
 
     /**

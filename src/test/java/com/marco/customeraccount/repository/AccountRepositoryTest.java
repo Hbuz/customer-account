@@ -1,6 +1,6 @@
 package com.marco.customeraccount.repository;
 
-import com.marco.customeraccount.model.Customer;
+import com.marco.customeraccount.model.Account;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,38 +12,38 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.math.BigDecimal;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @WebAppConfiguration
 @Transactional
-public class CustomerRepositoryIntegrationTest {
+public class AccountRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private AccountRepository accountRepository;
 
-    private Customer customer1;
+    private Account account1;
 
     @BeforeEach
     public void setUp() {
-        customer1 = new Customer();
-        customer1.setName("testName");
-        customer1.setSurname("testSurname");
+        account1 = new Account();
+        account1.setAccountNumber("test account");
+        account1.setBalance(BigDecimal.TEN);
     }
 
     @Test
-    public void whenFindById_thenReturnCustomer() {
+    public void whenStoreAccount_thenReturnAccount() {
 
-        entityManager.persist(customer1);
+        entityManager.persist(account1);
         entityManager.flush();
 
-        Optional<Customer> found = customerRepository.findById(customer1.getId());
+        Account stored = accountRepository.save(account1);
 
-        Assert.assertNotNull(found.get());
-        Assert.assertEquals(found.get().getName(), customer1.getName());
+        Assert.assertNotNull(stored);
+        Assert.assertEquals(stored.getAccountNumber(), account1.getAccountNumber());
     }
 }

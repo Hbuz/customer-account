@@ -1,5 +1,6 @@
 package com.marco.customeraccount.service;
 
+import com.marco.customeraccount.dto.CustomerDTO;
 import com.marco.customeraccount.exception.CustomerNotFoundException;
 import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
@@ -16,12 +17,12 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -30,12 +31,6 @@ public class CustomerServiceTest {
 
     @Mock
     CustomerRepository customerRepository;
-
-//    @Mock
-//    AccountRepository accountRepository;
-
-//    @Mock
-//    TransactionRepository transactionRepository;
 
     @InjectMocks
     CustomerServiceImpl customerService;
@@ -62,28 +57,32 @@ public class CustomerServiceTest {
 
         transaction1 = new Transaction();
         transaction1.setAmount(BigDecimal.ONE);
+        transaction1.setSendingDate(Instant.now());
         transactionList1 = new ArrayList<>();
+        transactionList1.add(transaction1);
+
+        account1.setTransactions(transactionList1);
+        customer1.setAccounts(accountList1);
     }
 
-//    @Test
-//    public void whenFetchCustomerInfo_andParamIsValid_thenReturnCustomerInfo() {
-//        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
-//        when(accountRepository.findAccountsByCustomerId(1L)).thenReturn(Optional.of(accountList1));
-//        when(transactionRepository.findTransactionsByAccountId(1L)).thenReturn(Optional.of(transactionList1));
-//        CustomerDTO customerDTO = customerService.fetchCustomerInfo(1L);
-//
-//        assertThat(customerDTO.getName()).isSameAs(customerDTO.getName());
-//    }
+    @Test
+    public void whenFetchCustomerInfo_andParamIsValid_thenReturnCustomerInfo() {
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
+        CustomerDTO customerDTO = customerService.fetchCustomerInfo(1L);
+
+        assertEquals(customerDTO.getName(), customer1.getName());
+    }
 
     @Test
-    public void whenGetTicket_andNotFound_thenTriggerException() {
+    public void whenFetchCustomerInfo_andNotFound_thenTriggerException() {
 
-        when(customerRepository.findById(2L)).thenReturn(Optional.empty());
+        Long customerId = 100L;
+        when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
 
         CustomerNotFoundException thrown = assertThrows(CustomerNotFoundException.class,
-                () -> customerService.fetchCustomerInfo(2L));
+                () -> customerService.fetchCustomerInfo(customerId));
 
-        assertTrue(thrown.getMessage().contains("No customer found"));
+        assertTrue(thrown.getMessage().contains(String.format("Customer '%d' not found", customerId)));
     }
 
     @Test

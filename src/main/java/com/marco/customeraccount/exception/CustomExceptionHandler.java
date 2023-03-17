@@ -39,7 +39,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST, "Invalid parameter", details);
-        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CustomerNotFoundException.class)

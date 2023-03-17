@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller to handle web operations
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/web/v1")

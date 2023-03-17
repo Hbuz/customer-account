@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -41,6 +42,7 @@ public class Transaction {
     private Instant sendingDate;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "account_id")
     private Account account;
 }

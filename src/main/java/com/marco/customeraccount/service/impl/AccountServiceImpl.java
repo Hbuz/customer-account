@@ -3,6 +3,8 @@ package com.marco.customeraccount.service.impl;
 import com.marco.customeraccount.dto.AccountDTO;
 import com.marco.customeraccount.dto.TransactionDTO;
 import com.marco.customeraccount.dto.request.AccountReqDTO;
+import com.marco.customeraccount.exception.CustomerNotFoundException;
+import com.marco.customeraccount.exception.ValueNotValidException;
 import com.marco.customeraccount.model.Account;
 import com.marco.customeraccount.model.Customer;
 import com.marco.customeraccount.repository.AccountRepository;
@@ -51,6 +53,10 @@ public class AccountServiceImpl implements AccountService {
 
         LOGGER.debug("openAccount - accountReqDTO:{}", accountReqDTO);
 
+        if (accountReqDTO == null) {
+            throw new ValueNotValidException();
+        }
+
         Set<ConstraintViolation<AccountReqDTO>> violations = validator.validate(accountReqDTO);
         if (!violations.isEmpty()) {
             StringBuilder sb = new StringBuilder();
@@ -84,6 +90,6 @@ public class AccountServiceImpl implements AccountService {
             return accountDTO;
         }
 
-        return AccountDTO.builder().build();
+        throw new CustomerNotFoundException(accountReqDTO.getCustomerId());
     }
 }
