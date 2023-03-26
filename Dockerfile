@@ -8,4 +8,4 @@ RUN mvn -B -f pom.xml clean package -DskipTests
 FROM openjdk:11-jdk-slim
 COPY --from=build /workspace/target/customer-account-0.0.1-SNAPSHOT.jar customer-account.jar
 EXPOSE 6379
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","customer-account.jar"]
